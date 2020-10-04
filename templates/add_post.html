@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <a href="{% url 'index' %}" class="btn btn-info px-lg-3 px-sm-1 m-3">Back to Home</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card mb-3">
+                <div class="card-header text-center bg-primary text-white">
+                    Create Post
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'add_post' %}" method="post">
+                        {% csrf_token %}
+                        {% load crispy_forms_tags %}
+                        {{ form|crispy }}
+                        <div class="form-group">
+                            <input type="submit" value="CREATE POST" class="btn btn-block btn-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header text-center bg-primary text-white">
+                            Manage Posts
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-striped small table-hover">
+                                <tr>
+                                    <td>Id</td>
+                                    <td>Title</td>
+                                    <td>Author</td>
+                                    <td>Date</td>
+                                    <td>Action</td>
+                                </tr>
+                                {% for p in posts %}
+                                <tr>
+                                    <td>{{ p.post_id }}</td>
+                                    <td>{{ p.post_title }}</td>
+                                    <td>{{ p.post_author }}</td>
+                                    <td>{{ p.post_doc }}</td>
+                                    <td>
+                                        <a href="{% url 'update_post' p.post_id %}" class="btn btn-sm btn-primary"><i class="fas fa-pen"></i> </a>
+                                        <a href="{% url 'delete_post' p.post_id %}" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></a>
+                                        <a href="{% url 'view_post' p.post_id %}" class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

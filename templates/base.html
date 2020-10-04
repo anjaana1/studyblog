@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study Blog</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'all.css' %}">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="{% url 'index' %}">StudyBlog</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+    <form class="form-inline my-2 my-lg-0 ml-auto" action="{% url 'search' %}" method="get">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" />
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+      <div class="d-flex flex-row ml-lg-auto">
+  <a href="{% url 'add_post' %}" class="p-2 btn btn-primary mr-2">Create Post</a>
+  <a href="" class="p-2 btn btn-danger">Logout</a>
+</div>
+  </div>
+</nav>
+{% block content %}
+{% block sidebar %}
+{% for c in categories %}
+<a href="{% url 'category' c.cat_id %}" class="list-group-item list-group-item-action list-group-item-primary text-primary">{{ c.cat_title }}</a>
+{% endfor %}
+{% endblock %}
+<div class="text-center bg-dark bottom-fixed">
+    <p class="text-lead text-white">Copyright | Ayush @ since 2020</p>
+</div>
+{% endblock %}
+<div class="card text-center bg-dark rounded-0 mt-2 fixed-bottom">
+  <p class="card-text text-white">Copyright | @Ayush</p>
+</div>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

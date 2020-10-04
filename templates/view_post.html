@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-lg-6 mx-auto">
+            <a href="{% url 'add_post' %}" class="btn btn-info px-lg-3 px-sm-1 mb-1 mr-lg-1">Back</a>
+            <a href="{% url 'index' %}" class="btn btn-info px-lg-3 px-sm-1 mb-1">Back to Home</a>
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="h4">{{ posts.post_title }}</h4>
+                    <div class="inline-group">
+                        <h6 class="h6 text-lead">Category: <b>{{ posts.post_category.cat_title }}</b></h6>
+                    </div>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-striped small table-hover">
+                        <tr>
+                            <td>Author</td>
+                            <td>{{ posts.post_author }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date</td>
+                            <td>{{ posts.post_doc }}</td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>{{ posts.post_desc }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

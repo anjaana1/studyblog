@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-lg-3">
+            <ul class="list-group mb-2">
+                <li class="list-group-item bg-primary text-white">Categories</li>
+                {% block sidebar %}
+                    {{ block.super }}
+                {% endblock %}
+            </ul>
+        </div>
+        <div class="col-lg-9">
+            {% if post_list %}
+                {% for p in post_list %}
+                    <div class="row mb-1">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header px-5 pb-0">
+                            <div class="row">
+                                <a href="{% url 'view_post' p.post_id %}" class="text-primary">{{ p.post_title }}</a>
+                                <p class="small text-danger ml-auto">{{ p.post_doc }}</p>
+                            </div>
+                            <div class="row">
+                                <p class="text-lead text-secondary">Category: <b>{{ p.post_category.cat_title }}</b></p>
+                                <p class="small text-lead ml-auto">Author: {{ p.post_author }}</p>
+                            </div>
+                        </div>
+                        <div class="card-body text-justify">
+                            <div class="inline-group">
+                                <p class="text-lead text-justify">{{ p.post_desc | truncatechars:300 }}</p>
+                                <a href="{% url 'view_post' p.post_id %}" class="btn btn-primary btn-sm float-right">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {% endfor %}
+            {% else %}
+                <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="jumbotron-fluid bg-danger text-center text-white p-5">
+                            <p class="display-4">Not Found</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
